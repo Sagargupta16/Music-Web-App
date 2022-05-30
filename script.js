@@ -21,41 +21,46 @@ let updateTimer;
 
 const music_list = [
     {
-        img : './images/jhms2.png',
-        name : 'Hawayein',
-        artist : 'Jab Harry Met Sejal - Arijit Singh',
-        music : 'music/Hawayein.mp3'
+        img : './images/choices.jpg',
+        name : 'Choices',
+        artist : 'PatrickReza',
+        music : 'music/Choices.mp3'
     },
     {
-        img : './images/ddlj.png',
-        name : 'Ho Gaya Hai Tujhko',
-        artist : 'Ddlj -  Lata Mangeshkar',
-        music : 'music/Ddlj.mp3'
+        img : './images/the-return.jpg',
+        name : 'The Return',
+        artist : 'NIVIRO',
+        music : 'music/The Return.mp3'
     },
     {
-        img : './images/kh3.png',
-        name : 'Har gadhi badal',
-        artist : 'Kal Ho Naa Ho -  Sonu nigam',
-        music : 'music/Kalhonaho.mp3'
+        img : './images/royalty.jpg',
+        name : 'Royalty',
+        artist : 'Maestro Chives, Egzod, Neoni',
+        music : 'music/Royalty.mp3'
     },
     {
-        img : './images/rab.png',
-        name : 'Tujh Mein Rab Dikh',
-        artist : 'Rab Ne Bana Di Jodi-Rathod',
-        music : 'music/Tujh Mein Rab Dikhta Hai - Hindi Song.mp3'
-    },
-
-    {
-        img : './images/ajab.png',
-        name : 'Ankhon Mein Teri',
-        artist : 'Om Shanti Om - KK',
-        music : 'music/Ajabsi.mp3'
+        img : './images/falling.jpg',
+        name : 'Falling',
+        artist : 'Rival, CRVN',
+        music : 'music/Falling.mp3'
     },
     {
-        img : './images/titli2.png',
-        name : 'Titli',
-        artist : 'Chennai Express - Chinmayi',
-        music : 'music/TITLI- Chennai Express.mp3'
+        img : './images/freedom.jpg',
+        name : 'Freedom',
+        artist : 'Goodknight.',
+        music : 'music/Freedome.mp3'
+    },
+    {
+        img : './images/moments.jpg',
+        name : 'Moments',
+        artist : 'Robbie Rosen, Lost Identities',
+        music : 'music/Moments.mp3'
+    },
+    {
+        img : './images/away.jpg',
+        name : 'Away',
+        artist : 'James Roche',
+        music : 'music/Away.mp3'
     }
 ];
 
@@ -63,7 +68,7 @@ loadTrack(track_index);
 
 function loadTrack(track_index){
     clearInterval(updateTimer);
-    reset();
+    reset(track_index);
 
     curr_track.src = music_list[track_index].music;
     curr_track.load();
@@ -71,16 +76,19 @@ function loadTrack(track_index){
     track_art.style.backgroundImage = "url(" + music_list[track_index].img + ")";
     track_name.textContent = music_list[track_index].name;
     track_artist.textContent = music_list[track_index].artist;
-    now_playing.textContent = "ShahRukh Playlist " + (track_index + 1) + " / " + music_list.length;
+    now_playing.textContent = "My PlayList " + (track_index + 1) + " / " + music_list.length;
 
     updateTimer = setInterval(setUpdate, 1000);
 
     curr_track.addEventListener('ended', nextTrack);
 }
-
-function reset(){
+function reset(x){
     curr_time.textContent = "00:00";
-    total_duration.textContent = "00:40";
+    let durationMinutes = Math.floor(curr_track.duration / 60);
+    let durationSeconds = Math.floor(curr_track.duration - durationMinutes * 60);
+    if(durationSeconds < 10) { durationSeconds = "0" + durationSeconds; }
+    if(durationMinutes < 10) { durationMinutes = "0" + durationMinutes; }
+    total_duration.textContent = durationMinutes + ":" + durationSeconds;
     seek_slider.value = 0;
 }
 function randomTrack(){
@@ -154,6 +162,6 @@ function setUpdate(){
         if(durationMinutes < 10) { durationMinutes = "0" + durationMinutes; }
 
         curr_time.textContent = currentMinutes + ":" + currentSeconds;
-        // total_duration.textContent = durationMinutes + ":" + durationMinutes;
+        total_duration.textContent = durationMinutes + ":" + durationSeconds;
     }
 }
