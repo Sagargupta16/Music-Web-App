@@ -8,10 +8,9 @@
 body {
   color: black;
   font-family: "Lato", sans-serif;
-  /* background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);  */
   overflow: hidden;
-  background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
-
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
 }
 .player {
   width: 100%;
@@ -23,17 +22,22 @@ body {
 }
 
 .wrapper {
-  width: 350px;
-  padding: 30px 40px;
-  border-radius: 20px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-  background-color: white;
-  transition: all 0.5s ease;
+  width: 380px;
+  max-width: 90vw;
+  padding: 35px 45px;
+  border-radius: 25px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 25px 45px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .wrapper:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: 
+    0 35px 60px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.3);
 }
 .details {
   display: flex;
@@ -42,97 +46,148 @@ body {
   justify-content: center;
 }
 .track-art {
-  margin: 20px auto;
-  height: 190px;
-  width: 190px;
+  margin: 25px auto;
+  height: 200px;
+  width: 200px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
-  border: 2px solid #fff;
-  box-shadow: 0px 6px 5px #ccc;
-  box-shadow: 0px 6px 5px rgba(33, 30, 30, 0.701),
-    -0px -4px 5px rgba(71, 71, 71, 0.21);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+.track-art:hover {
+  transform: scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
 }
 .now-playing {
-  font-size: 25px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
 }
 .track-name {
-  font-size: 30px;
-  font-weight: 400;
-  margin-bottom: 5px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
   text-transform: capitalize;
+  color: #333;
+  text-align: center;
 }
 
 .track-artist {
-  font-size: 17px;
+  font-size: 16px;
   text-transform: capitalize;
   font-family: "Roboto", sans-serif;
-  margin-top: 3px;
-  color: rgba(0, 0, 0, 0.715);
+  margin-top: 5px;
+  color: #666;
+  text-align: center;
 }
 .buttons {
-  width: 90%;
-  margin: auto;
+  width: 100%;
+  margin: 25px auto 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 10px;
 }
-.buttons i {
-  opacity: 0.9;
-  padding: 13px;
-  font-size: 30px;
+.buttons button {
+  background: none;
+  border: none;
+  color: #555;
   cursor: pointer;
-  transition: 0.2s;
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
-.buttons i:hover {
-  color: #23211f;
+.buttons button:hover {
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+.buttons button:active {
+  transform: translateY(0);
+}
+.buttons button i {
+  opacity: 0.9;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+.buttons .playpause-track {
+  padding: 15px;
 }
 .buttons .playpause-track i {
-  font-size: 65px;
+  font-size: 48px;
+  color: #667eea;
+}
+.buttons .playpause-track:hover i {
+  color: #5a67d8;
+  transform: scale(1.1);
 }
 
 .slider_container {
   width: 100%;
-  margin: 20px auto;
-  margin-bottom: 30px;
+  margin: 25px auto;
+  margin-bottom: 20px;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 .current-time,
 .total-duration {
-  position: absolute;
-  color: rgba(0, 0, 0, 0.731);
-  font-family: cursive;
-  font-size: 13px;
-}
-.current-time {
-  padding-top: 30px;
-  left: 0;
-}
-.total-duration {
-  padding-top: 10px;
-  right: 0;
+  color: #666;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 35px;
+  text-align: center;
 }
 .seek_slider {
-  width: 100%;
-  border-radius: 20px;
+  flex: 1;
+  border-radius: 10px;
   appearance: none;
-  height: 4px;
-  background: #83a9ff;
-  transition: opacity 0.2s;
+  height: 6px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-color: #e2e8f0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.seek_slider:hover {
+  height: 8px;
 }
 .seek_slider::-webkit-slider-thumb {
   appearance: none;
-  width: 13px;
-  height: 13px;
-  background: white;
-  border: 3px solid #3774ff;
+  width: 16px;
+  height: 16px;
+  background: #667eea;
+  border: 2px solid #fff;
   cursor: pointer;
-  border-radius: 100%;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+.seek_slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
 .rotate {
-  animation: rotation 9s infinite linear;
+  animation: rotation 10s infinite linear;
 }
 @keyframes rotation {
   from {
@@ -143,9 +198,52 @@ body {
   }
 }
 
-.fa-random {
-  margin-right: 5px;
+/* Active states for buttons */
+.random-track.active i,
+.repeat-track.active i {
+  color: #667eea !important;
 }
-.fa-repeat {
-  margin-left: 5px;
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .wrapper {
+    width: 95vw;
+    padding: 25px 30px;
+  }
+  
+  .track-art {
+    height: 160px;
+    width: 160px;
+  }
+  
+  .track-name {
+    font-size: 20px;
+  }
+  
+  .buttons button i {
+    font-size: 16px;
+  }
+  
+  .buttons .playpause-track i {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 350px) {
+  .wrapper {
+    padding: 20px 25px;
+  }
+  
+  .track-art {
+    height: 140px;
+    width: 140px;
+  }
+  
+  .buttons {
+    gap: 5px;
+  }
+  
+  .buttons button {
+    padding: 8px;
+  }
 }
